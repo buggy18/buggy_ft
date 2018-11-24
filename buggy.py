@@ -4,20 +4,17 @@ from linepy import *
 from akad.ttypes import Message
 from datetime import datetime
 from time import sleep
-from bs4 import BeautifulSoup
 from humanfriendly import format_timespan, format_size, format_number, format_length
 import time, random, sys, json, codecs, threading, glob, re, string, os, requests, subprocess, six, ast, pytz, urllib, urllib.parse, shutil
 from subprocess import check_output
-from gtts import gTTS
-from googletrans import Translator
 
 botStart = time.time()
 
-puy = LINE("Ez9NXV49sfJZbVO95dD4.MBrD3kv6F5JVe6KSmRknra.NGNwyeH3lrOR4YwjO8/+OkkxoF2emJPLHj11Ytd2bG4=")
-#puy = LINE("mpuy18@messagea.gq","Muhamad18")
+#puy = LINE()
+puy = LINE("Auth Token")
+#puy = LINE("Email","Password")
 puy.log("Your Auth Token : \n" + str(puy.authToken))
 
-readOpen = codecs.open("read.json","r","utf-8")
 settingOpen = codecs.open("setting.json","r","utf-8")
 
 puyMID = puy.profile
@@ -25,7 +22,6 @@ puyProfile = puy.getProfile()
 puySettings = puy.getSettings()
 oepoll = OEPoll(puy)
 call = puy
-read = json.load(readOpen)
 settings = json.load(settingOpen)
 admin = ["uac8e3eaf1eb2a55770bf10c3b2357c33","u99b45ddca57a7f98ef13a92c32b28d44"]
 
@@ -91,23 +87,12 @@ def removeCmd(text, key=''):
     return text_[len(sep[0] + ' '):]
 
 def command(text):
-    pesan = text.lower()
-    if pesan.startswith(settings["keyCommand"]):
-        cmd = pesan.replace(settings["keyCommand"],"")
+    anuan = text.lower()
+    if anuan.startswith(settings["keyCommand"]):
+        cmd = anuan.replace(settings["keyCommand"],"")
     else:
         cmd = "command"
     return cmd
-
-def waktu(to):
-    tz = pytz.timezone("Asia/Jakarta")
-    timeNow = datetime.now(tz=tz)
-    day = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis","Jumat", "Sabtu"]
-    hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
-    bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
-    hr = timeNow.strftime("%A")
-    bln = timeNow.strftime("%m")
-    #puy.sendMessage(to, str(timeNow.strftime('%H : %M : %S')))
-    puy.sendMessage(to, "\n\n"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
 def logError(text):
     puy.log(" ( ERROR MESSAGES DETECTED ) " + str(text))
@@ -165,7 +150,7 @@ def puyStarted(op):
                     cmd = command(text)
                 for text in text.split(" & "):
                     if cmd.startswith("help"):
-                       puy.sendReplyMessage(msg_id,to, buggyhelp+str(waktu))
+                       puy.sendMessage(to, buggyhelp)
 ### COMMANDS ###
                     elif cmd.startswith("speed"):
                         start = time.time()
@@ -174,26 +159,26 @@ def puyStarted(op):
                         took = time.time() - start
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
-                        puy.sendReplyMessage(msg_id,to,"%.3fms" % (took)+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to,"%.3fms" % (took)+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif cmd.startswith("@bye"):
                       if msg.toType == 2:
                         ginfo = puy.getGroupIdsJoined()
-                        puy.sendReplyMessage(msg_id,to, 'See u!')
+                        puy.sendMessage(to, 'See u!')
                         puy.leaveGroup(to)
                       else:
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
-                        puy.sendReplyMessage(msg_id,to,"Only Work in Groups!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to,"Only Work in Groups!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif cmd.startswith("rerun"):
                       if sender in admin:
-                        puy.sendReplyMessage(msg_id,to,"Preparing for Restart the System!")
+                        puy.sendMessage(to,"Preparing for Restart the System!")
                         restartBot()
                       else:
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
-                        puy.sendReplyMessage(msg_id,to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif cmd.startswith("runtime"):
                       if sender in admin:
@@ -202,20 +187,20 @@ def puyStarted(op):
                         runtime = format_timespan(runtime)
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
-                        puy.sendReplyMessage(msg_id,to, "{}".format(str(runtime)+"\n\n"+timeNow.strftime('%H : %M : %S')))
+                        puy.sendMessage(to, "{}".format(str(runtime)+"\n\n"+timeNow.strftime('%H : %M : %S')))
                       else:
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
                         puy.sendMessage(to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
-                    elif cmd.startswith("myinfo"):puy.sendReplyMessage(msg_id,to,"Hello, {}".format(puy.getContact(sender).displayName+"\n\n{}".format(puy.getContact(sender))))
+                    elif cmd.startswith("myinfo"):puy.sendMessage(to,"Hello, {}".format(puy.getContact(sender).displayName+"\n\n{}".format(puy.getContact(sender))))
 
-                    elif cmd.startswith("about"):puy.sendReplyMessage(msg_id,to,"FREE USE BUGGY!\n\nSpecial Thanks To TUHAN YME, ERR0RTEAMS, HELLOWORLD, and the Friends Around Me!")
+                    elif cmd.startswith("about"):puy.sendMessage(to,"FREE USE BUGGY!\n\nSpecial Thanks To TUHAN YME, ERR0RTEAMS, HELLOWORLD, and the Friends Around Me!")
 
                     elif cmd.startswith("checkalive"):
                       if sender in admin:
-                        puy.sendReplyMessage(msg_id,to,"Hi Admin")
-                      else:puy.sendReplyMessage(msg_id,to,"Hiii!")
+                        puy.sendMessage(to,"Hi Admin")
+                      else:puy.sendMessage(to,"Hiii!")
 
                     elif msg.text.lower().startswith("getpicture "):
                         if 'MENTION' in msg.contentMetadata.keys()!= None:
@@ -230,7 +215,7 @@ def puyStarted(op):
                                     lists.append(mention["M"])
                             for ls in lists:
                                 path = "http://dl.profile.line.naver.jp/" + puy.getContact(ls).pictureStatus
-                                puy.sendReplyImageWithURL(msg_id,to, str(path))
+                                puy.sendImageWithURL(to, str(path))
                                 puy.sendMessage(to, "Get Picture at"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif msg.text.lower().startswith("getcover "):
@@ -247,7 +232,7 @@ def puyStarted(op):
                                         lists.append(mention["M"])
                                 for ls in lists:
                                     path = puy.getProfileCoverURL(ls)
-                                    puy.sendReplyImageWithURL(msg_id,to, str(path))
+                                    puy.sendImageWithURL(to, str(path))
                                     puy.sendMessage(to, "Get Cover at"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif text.lower() == 'infogroup':
@@ -279,12 +264,12 @@ def puyStarted(op):
                         #ret_ += "\n    [ Group Info ]"
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
-                        puy.sendReplyMessage(msg_id,to, str(ret_)+"\n\n"+timeNow.strftime('%H : %M : %S'))
-                        puy.sendReplyImageWithURL(msg_id,to, path)
+                        puy.sendMessage(to, str(ret_)+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendImageWithURL(to, path)
                       else:
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
-                        puy.sendReplyMessage(msg_id,to,"Only Work in Groups!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to,"Only Work in Groups!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif text.lower() == 'groupmemberlist':
                         if msg.toType == 2:
@@ -297,11 +282,11 @@ def puyStarted(op):
                                 ret_ += "\n╠ {}. {}".format(str(no), str(mem.displayName))
                                 no += 1
                             ret_ += "\n╚══[ Total {} ]".format(str(len(group.members)))
-                            puy.sendReplyMessage(msg_id,to, str(ret_)+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                            puy.sendMessage(to, str(ret_)+"\n\n"+timeNow.strftime('%H : %M : %S'))
                         else:
                           tz = pytz.timezone("Asia/Jakarta")
                           timeNow = datetime.now(tz=tz)
-                          puy.sendReplyMessage(msg_id,to,"Only Work in Groups!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                          puy.sendMessage(to,"Only Work in Groups!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 ### REMOTE COMMANDS ###
 
                     elif cmd == "list group":
@@ -316,11 +301,11 @@ def puyStarted(op):
                             tz = pytz.timezone("Asia/Jakarta")
                             timeNow = datetime.now(tz=tz)
                         ret_ += "\n - {} Groups -".format(str(len(groups)))
-                        puy.sendReplyMessage(msg_id,to, str(ret_)+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to, str(ret_)+"\n\n"+timeNow.strftime('%H : %M : %S'))
                       else:
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
-                        puy.sendReplyMessage(msg_id,to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                   
                     elif cmd.startswith("openlink to"):
@@ -348,7 +333,7 @@ def puyStarted(op):
                         else:
                           tz = pytz.timezone("Asia/Jakarta")
                           timeNow = datetime.now(tz=tz)
-                          puy.sendReplyMessage(msg_id,to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                          puy.sendMessage(to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif cmd.startswith("closelink to"):
                         if sender in admin:
@@ -373,7 +358,7 @@ def puyStarted(op):
                         else:
                           tz = pytz.timezone("Asia/Jakarta")
                           timeNow = datetime.now(tz=tz)
-                          puy.sendReplyMessage(msg_id,to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                          puy.sendMessage(to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif cmd.startswith("memberlist to"):
                         if sender in admin:
@@ -396,51 +381,51 @@ def puyStarted(op):
                         else:
                           tz = pytz.timezone("Asia/Jakarta")
                           timeNow = datetime.now(tz=tz)
-                          puy.sendReplyMessage(msg_id,to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                          puy.sendMessage(to,"Command Denied!"+"\n\n"+timeNow.strftime('%H : %M : %S'))
 ## SETTINGS ON/OFF ##
                     elif text.lower() == 'notif on':
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
                         settings['greet']['join']['status'] == True
-                        puy.sendReplyMessage(msg_id,to," [ Notify ]\n Now Active."+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to," [ Notify ]\n Now Active."+"\n\n"+timeNow.strftime('%H : %M : %S'))
                     elif text.lower() == 'notif off':
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
                         settings['greet']['join']['status'] = False
-                        puy.sendReplyMessage(msg_id,to," [ Notify ]\n Now UnActive."+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to," [ Notify ]\n Now UnActive."+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif cmd.startswith("autoadd on"):
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
                         settings["autoAdd"] = True
-                        puy.sendReplyMessage(msg_id,to, " [ Auto Add ]\n Now Active."+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to, " [ Auto Add ]\n Now Active."+"\n\n"+timeNow.strftime('%H : %M : %S'))
                     elif cmd.startswith("autoadd off"):
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
                         settings["autoAdd"] = False
-                        puy.sendReplyMessage(msg_id,to, " [ Auto Add ]\n Now UnActive."+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to, " [ Auto Add ]\n Now UnActive."+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif cmd.startswith("autojoin on"):
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
                         settings["autoJoin"] = True
-                        puy.sendReplyMessage(msg_id,to, " [ Auto Join ]\n Now Active."+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to, " [ Auto Join ]\n Now Active."+"\n\n"+timeNow.strftime('%H : %M : %S'))
                     elif cmd.startswith("autojoin off"):
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
                         settings["autoJoin"] = False
-                        puy.sendReplyMessage(msg_id,to, " [ Auto Join ]\n Now UnActive."+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to, " [ Auto Join ]\n Now UnActive."+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
                     elif text.lower() == 'autoleave on':
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
                         settings["autoLeave"] = True
-                        puy.sendReplyMessage(msg_id,to, " [ Auto Leave ]\n Now Active."+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to, " [ Auto Leave ]\n Now Active."+"\n\n"+timeNow.strftime('%H : %M : %S'))
                     elif text.lower() == 'autoleave off':
                         tz = pytz.timezone("Asia/Jakarta")
                         timeNow = datetime.now(tz=tz)
                         settings["autoLeave"] = False
-                        puy.sendReplyMessage(msg_id,to, " [ Auto Leave ]\n Now UnActive."+"\n\n"+timeNow.strftime('%H : %M : %S'))
+                        puy.sendMessage(to, " [ Auto Leave ]\n Now UnActive."+"\n\n"+timeNow.strftime('%H : %M : %S'))
 
         if op.type == 55:
             print (" -> 55 ( NOTIFY READ MESSAGES )")

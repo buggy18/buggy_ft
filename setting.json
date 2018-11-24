@@ -1,0 +1,17 @@
+{
+    "autoAdd": false,
+    "autoJoin": true,
+    "lang": "",
+    "notifikasi": false,
+    "greet": {
+        "join": {
+            "status": true,
+            "message": "Selamat Datang."
+        },
+        "leave": {
+            "status": true,
+            "message": "Selamat Jalan."
+        }
+    },
+    "keyCommand": "",
+}

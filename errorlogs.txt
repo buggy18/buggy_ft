@@ -1,0 +1,73 @@
+
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'clBot' is not defined
+[<module 'time' (built-in)>] name 'cmd' is not defined
+[<module 'time' (built-in)>] name 'cmd' is not defined
+[<module 'time' (built-in)>] 'LINE' object has no attribute 'sendReplyMessage'
+[<module 'time' (built-in)>] 'LINE' object has no attribute 'sendReplyMessage'
+[<module 'time' (built-in)>] name 'to' is not defined
+[<module 'time' (built-in)>] name 'admin' is not defined
+[<module 'time' (built-in)>] name 'admin' is not defined
+[<module 'time' (built-in)>] name 'to' is not defined
+[<module 'time' (built-in)>] encoding without a string argument
+[<module 'time' (built-in)>] 
+[<module 'time' (built-in)>] 
+[<module 'time' (built-in)>] encoding without a string argument
+[<module 'time' (built-in)>] 'notifikasi'
+[<module 'time' (built-in)>] name 'to' is not defined
+[<module 'time' (built-in)>] name 'to' is not defined
+[<module 'time' (built-in)>] name 'to' is not defined
+[<module 'time' (built-in)>] name 'to' is not defined
+[<module 'time' (built-in)>] name 'to' is not defined
+[<module 'time' (built-in)>] 'float' object has no attribute 'strftime'
+[<module 'time' (built-in)>] local variable 'timeNow' referenced before assignment
+[<module 'time' (built-in)>] waktu() missing 2 required positional arguments: 'to' and 'text'
+[<module 'time' (built-in)>] name 'to' is not defined
+[<module 'time' (built-in)>] waktu() missing 1 required positional argument: 'to'
+[<module 'time' (built-in)>] waktu() missing 2 required positional arguments: 'to' and 'tz'
+[<module 'time' (built-in)>] waktu() missing 2 required positional arguments: 'to' and 'tz'
+[<module 'time' (built-in)>] name 'to' is not defined
+[<module 'time' (built-in)>] 'LINE' object has no attribute 'waktu'
+[<module 'time' (built-in)>] 'LINE' object has no attribute 'waktu'
+[<module 'time' (built-in)>] 'float' object has no attribute 'strftime'
+[<module 'time' (built-in)>] 'str' object has no attribute 'displayName'
+[<module 'time' (built-in)>] 'str' object has no attribute 'displayName'
+[<module 'time' (built-in)>] local variable 'path' referenced before assignment
+[<module 'time' (built-in)>] argument of type 'Profile' is not iterable
+[<module 'time' (built-in)>] name 'removeCmd' is not defined
+[<module 'time' (built-in)>] name 'removeCmd' is not defined
+[<module 'time' (built-in)>] name 'setKey' is not defined
+[<module 'time' (built-in)>] name 'textt' is not defined
+[<module 'time' (built-in)>] argument of type 'Profile' is not iterable
+[<module 'time' (built-in)>] local variable 'path' referenced before assignment
+[<module 'time' (built-in)>] local variable 'timeNow' referenced before assignment
+[<module 'time' (built-in)>] local variable 'timeNow' referenced before assignment
+[<module 'time' (built-in)>] local variable 'timeNow' referenced before assignment
+[<module 'time' (built-in)>] local variable 'timeNow' referenced before assignment
+[<module 'time' (built-in)>] local variable 'timeNow' referenced before assignment
+[<module 'time' (built-in)>] local variable 'timeNow' referenced before assignment
+[<module 'time' (built-in)>] local variable 'path' referenced before assignment
+[<module 'time' (built-in)>] 'float' object has no attribute 'strftime'
+[<module 'time' (built-in)>] 'keyCommand'
+[<module 'time' (built-in)>] 'keyCommand'
+[<module 'time' (built-in)>] 'keyCommand'
+[<module 'time' (built-in)>] 'keyCommand'
+[<module 'time' (built-in)>] 'keyCommand'
+[<module 'time' (built-in)>] 'keyCommand'
+[<module 'time' (built-in)>] 'keyCommand'
+[<module 'time' (built-in)>] 'keyCommand'

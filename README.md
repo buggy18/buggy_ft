@@ -1,3 +1,4 @@
 Free Use.
 
-**Special Thanks to Allah SWT, ErrorTeam, HelloWorld.
+  - SUPPORTED BY U -
+*Special Thanks to Allah SWT, ErrorTeam, HelloWorld.

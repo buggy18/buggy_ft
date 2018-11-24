@@ -225,64 +225,6 @@ class Talk(object):
         self._messageReq[to] += 1
         return self.talk.sendMessage(self._messageReq[to], msg)
 
-    # REPLY MESSAGE BY ERROR TEAM #
-
-    @loggedIn
-    def generateReplyMessage(self, relatedMessageId):
-        msg = Message()
-        msg.relatedMessageServiceCode = 1
-        msg.messageRelationType = 3
-        msg.relatedMessageId = str(relatedMessageId)
-        return msg
-
-    @loggedIn
-    def sendReplyMessage(self, relatedMessageId, to, text, contentMetadata={}, contentType=0):
-        msg = self.generateReplyMessage(relatedMessageId)
-        msg.to = to
-        msg.text = text
-        msg.contentType = contentType
-        msg.contentMetadata = contentMetadata
-        if to not in self._messageReq:
-            self._messageReq[to] = -1
-        self._messageReq[to] += 1
-        return self.talk.sendMessage(self._messageReq[to], msg)
-
-    @loggedIn
-    def sendReplySticker(self, msg_id, to, stickerVersion, packageId, stickerId):
-        contentMetadata = {
-            'STKVER': stickerVersion,
-            'STKPKGID': packageId,
-            'STKID': stickerId
-        }
-        return self.sendReplyMessage(msg_id, to, '', contentMetadata, 7)
-
-    @loggedIn
-    def sendReplyImage(self, msg_id, to, path):
-        objectId = self.sendReplyMessage(msg_id, to=to, text=None, contentType = 1).id
-        return self.uploadObjTalk(path=path, type='image', returnAs='bool', objId=objectId)
-
-    @loggedIn
-    def sendReplyImageWithURL(self,msg_id, to, url):
-        path = self.downloadFileURL(url, 'path')
-        self.sendReplyImage(msg_id, to, path)
-        return self.deleteFile(path)
-
-    @loggedIn
-    def sendReplyContact(self, msg_id, to, mid):
-        contentMetadata = {'mid': mid}
-        return self.sendReplyMessage(msg_id, to, '', contentMetadata, 13)
-
-    @loggedIn
-    def sendReplyGift(self, msg_id, to, productId, productType):
-        if productType not in ['theme','sticker']:
-            raise Exception('Invalid productType value')
-        contentMetadata = {
-            'MSGTPL': str(randint(0, 12)),
-            'PRDTYPE': productType.upper(),
-            'STKPKGID' if productType == 'sticker' else 'PRDID': productId
-        }
-        return self.sendReplyMessage(msg_id, to, '', contentMetadata, 9)
-
     @loggedIn
     def sendMention(self, to, mid, firstmessage='', lastmessage=''):
         arrData = ""
